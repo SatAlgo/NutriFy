@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noutrify</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+    header {
+        background-color: #09a349;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+    }
+    h1 {
+        margin: 0;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .section {
+        margin-bottom: 30px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .section-header {
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+        cursor: pointer;
+    }
+    #international-cuisine .section-header {
+        background-color: #ff6666; /* Red */
+    }
+    #indian-cuisine .section-header {
+        background-color: #ff9933; /* Orange */
+    }
+    #mess-food .section-header {
+        background-color: #678135; /* Green */
+    }
+    #fruits .section-header {
+        background-color: #0099ff; /* Blue */
+    }
+    #age-nutrition .section-header {
+        background-color: #9933ff; /* Purple */
+    }
+    .food-item-container {
+        display: none;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 10px;
+        background-color: #fff;
+    }
+    .food-item {
+        cursor: pointer;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin: 5px;
+        transition: background-color 0.3s ease;
+        background-color: #e6e6e6;
+        border-radius: 5px;
+    }
+    .food-item:hover {
+        background-color: #cccccc;
+    }
+    #nutrients {
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+    #bmi-calculator {
+        background-color: #ff9933;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    #bmi-calculator button {
+        background-color: #ff6666;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #bmi-calculator button:hover {
+        background-color: #cc3333;
+    }
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 40px 0;
+        text-align: center;
+    }
+    .container-footer {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .about-section, .contact-form {
+        flex-basis: 45%;
+    }
+    .contact-form form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-form label, .contact-form textarea, .contact-form input[type="text"] {
+        margin-bottom: 10px;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+    }
+    .contact-form textarea {
+        resize: none;
+        height: 100px;
+    }
+    .contact-form button {
+        background-color: #ff6666;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .contact-form button:hover {
+        background-color: #cc3333;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Noutrify</h1>
+</header>
+
+<div class="container">
+
+    <div class="section" id="international-cuisine">
+        <div class="section-header" onclick="toggleFoodItems('international-cuisine')">
+            <h2>International Cuisine</h2>
+        </div>
+        <div class="food-item-container">
+            <div class="food-item" onclick="displayNutrients('Pizza')">Pizza</div>
+            <div class="food-item" onclick="displayNutrients('Salad')">Salad</div>
+            <div class="food-item" onclick="displayNutrients('Burger')">Burger</div>
+            <div class="food-item" onclick="displayNutrients('Sushi')">Sushi</div>
+            <div class="food-item" onclick="displayNutrients('Pasta')">Pasta</div>
+            <div class="food-item" onclick="displayNutrients('Fruit Salad')">Fruit Salad</div>
+            <div class="food-item" onclick="displayNutrients('Steak')">Steak</div>
+            <div class="food-item" onclick="displayNutrients('Tacos')">Tacos</div>
+            <div class="food-item" onclick="displayNutrients('Sandwich')">Sandwich</div>
+            <div class="food-item" onclick="displayNutrients('Soup')">Soup</div>
+        </div>
+    </div>
+
+    <div class="section" id="indian-cuisine">
+        <div class="section-header" onclick="toggleFoodItems('indian-cuisine')">
+            <h2>Indian Cuisine</h2>
+        </div>
+        <div class="food-item-container">
+            <div class="food-item" onclick="displayNutrients('Biryani')">Biryani</div>
+            <div class="food-item" onclick="displayNutrients('Butter Chicken')">Butter Chicken</div>
+            <div class="food-item" onclick="displayNutrients('Naan')">Naan</div>
+            <div class="food-item" onclick="displayNutrients('Tandoori Chicken')">Tandoori Chicken</div>
+            <div class="food-item" onclick="displayNutrients('Paneer Tikka')">Paneer Tikka</div>
+            <div class="food-item" onclick="displayNutrients('Samosa')">Samosa</div>
+            <div class="food-item" onclick="displayNutrients('Chole Bhature')">Chole Bhature</div>
+            <div class="food-item" onclick="displayNutrients('Rajma Chawal')">Rajma Chawal</div>
+            <div class="food-item" onclick="displayNutrients('Dosa')">Dosa</div>
+            <div class="food-item" onclick="displayNutrients('Idli Sambhar')">Idli Sambhar</div>
+        </div>
+    </div>
+
+    <div class="section" id="mess-food">
+        <div class="section-header" onclick="toggleFoodItems('mess-food')">
+            <h2>Mess Food</h2>
+        </div>
+        <div class="food-item-container">
+            <div class="food-item" onclick="displayNutrients('Roti')">Roti</div>
+            <div class="food-item" onclick="displayNutrients('Dal')">Dal</div>
+            <div class="food-item" onclick="displayNutrients('Rice')">Rice</div>
+            <div class="food-item" onclick="displayNutrients('Sabzi')">Sabzi</div>
+            <div class="food-item" onclick="displayNutrients('Chicken Curry')">Chicken Curry</div>
+            <div class="food-item" onclick="displayNutrients('Pulao')">Pulao</div>
+            <div class="food-item" onclick="displayNutrients('Paneer Curry')">Paneer Curry</div>
+            <div class="food-item" onclick="displayNutrients('Sambar')">Sambar</div>
+            <div class="food-item" onclick="displayNutrients('Rasam')">Rasam</div>
+            <div class="food-item" onclick="displayNutrients('Curd Rice')">Curd Rice</div>
+
+            <div class="food-item" onclick="displayNutrients('Toor Dal (Pigeon Peas)')">Toor Dal (Pigeon Peas)</div>
+            <div class="food-item" onclick="displayNutrients('Chana Dal (Split Bengal Gram)')">Chana Dal (Split Bengal Gram)</div>
+            <div class="food-item" onclick="displayNutrients('Masoor Dal (Red Lentils)')">Masoor Dal (Red Lentils)</div>
+            <div class="food-item" onclick="displayNutrients('Moong Dal (Split Green Gram)')">Moong Dal (Split Green Gram)</div>
+            <div class="food-item" onclick="displayNutrients('Urad Dal (Black Gram)')">Urad Dal (Black Gram)</div>
+            <div class="food-item" onclick="displayNutrients('Arhar Dal (Split Pigeon Peas)')">Arhar Dal (Split Pigeon Peas)</div>
+            <div class="food-item" onclick="displayNutrients('Rajma (Kidney Beans)')">Rajma (Kidney Beans)</div>
+            <div class="food-item" onclick="displayNutrients('Matki (Moth Beans)')">Matki (Moth Beans)</div>
+            <div class="food-item" onclick="displayNutrients('Kala Chana (Black Chickpeas)')">Kala Chana (Black Chickpeas)</div>
+
+        </div>
+    </div>
+
+    <div class="section" id="fruits">
+        <div class="section-header" onclick="toggleFoodItems('fruits')">
+            <h2>Fruits</h2>
+        </div>
+        <div class="food-item-container">
+            <div class="food-item" onclick="displayNutrients('Apple')">Apple</div>
+            <div class="food-item" onclick="displayNutrients('Banana')">Banana</div>
+            <div class="food-item" onclick="displayNutrients('Mango')">Mango</div>
+            <div class="food-item" onclick="displayNutrients('Grapes')">Grapes</div>
+            <div class="food-item" onclick="displayNutrients('Papaya')">Papaya</div>
+            <div class="food-item" onclick="displayNutrients('Watermelon')">Watermelon</div>
+            <div class="food-item" onclick="displayNutrients('Orange')">Orange</div>
+            <div class="food-item" onclick="displayNutrients('Pineapple')">Pineapple</div>
+            <div class="food-item" onclick="displayNutrients('Guava')">Guava</div>
+            <div class="food-item" onclick="displayNutrients('Kiwi')">Kiwi</div>
+        </div>
+    </div>
+
+    <div class="section" id="age-nutrition">
+        <div class="section-header" onclick="toggleFoodItems('age-nutrition')">
+            <h2>Age Nutrition</h2>
+        </div>
+        <div class="food-item-container">
+            <div class="food-item" onclick="displayNutrients('Children (ages 4-8)')">Children (ages 4-8)</div>
+            <div class="food-item" onclick="displayNutrients('Adolescents (ages 9-13)')">Adolescents (ages 9-13)</div>
+            <div class="food-item" onclick="displayNutrients('Teens (ages 14-18)')">Teens (ages 14-18)</div>
+            <div class="food-item" onclick="displayNutrients('Adults (ages 19-50)')">Adults (ages 19-50)</div>
+            <div class="food-item" onclick="displayNutrients('Older Adults (50+)')">Older Adults (50+)</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div id="nutrients"></div>
+    </div>
+
+    <div class="section">
+        <div id="bmi-calculator">
+            <h2 style="color: #fff;">BMI Calculator</h2>
+            <div>
+                <label for="weight" style="color: #fff;">Weight (kg):</label>
+                <input type="number" id="weight" min="1" step="any">
+            </div>
+            <div>
+                <label for="height" style="color: #fff;">Height (cm):</label>
+                <input type="number" id="height" min="1" step="any">
+            </div>
+            <button onclick="calculateBMI()">Calculate BMI</button>
+            <div id="bmi-result"></div>
+            <div id="bmi-status"></div>
+            <div id="diet-suggestion"></div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container-footer">
+        <div class="about-section">
+            <h2>About Noutrify</h2>
+            <p>Noutrify is your go-to platform for exploring nutritional information and maintaining a healthy lifestyle.</p>
+            <p>         .                                                         </p>
+            <p>         .                                                             </p>
+            <p>         .                                                                </p>
+            <p>NOTE : Please note that the values of nutrients mentioned are approximate and can vary based on specific recipes and cooking methods. Additionally, the actual nutrient content may vary depending on the proportions and ingredients used in preparing each food item.</p>
+        </div>
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="contact">Surface Contact or Email:</label>
+                <input type="text" id="contact" name="contact" required>
+                <label for="thoughts">Your Thoughts:</label>
+                <textarea id="thoughts" name="thoughts" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const nutrientsDiv = document.getElementById('nutrients');
+    const bmiResultDiv = document.getElementById('bmi-result');
+    const bmiStatusDiv = document.getElementById('bmi-status');
+    const dietSuggestionDiv = document.getElementById('diet-suggestion');
+
+    const nutrientsData = {
+        // Nutritional data for food items
+        pizza: {
+            carbs: 30,
+            protein: 12,
+            fats: 8,
+            calories: 300
+        },
+        salad: {
+            carbs: 10,
+            protein: 5,
+            fats: 3,
+            calories: 150
+        },
+        burger: {
+            carbs: 25,
+            protein: 8,
+            fats: 15,
+            calories: 350
+        },
+        sushi: {
+            carbs: 20,
+            protein: 10,
+            fats: 5,
+            calories: 250
+        },
+        pasta: {
+            carbs: 35,
+            protein: 8,
+            fats: 10,
+            calories: 400
+        },
+        'fruit salad': {
+            carbs: 15,
+            protein: 2,
+            fats: 1,
+            calories: 100
+        },
+        steak: {
+            carbs: 0,
+            protein: 25,
+            fats: 15,
+            calories: 350
+        },
+        tacos: {
+            carbs: 25,
+            protein: 10,
+            fats: 8,
+            calories: 300
+        },
+        sandwich: {
+            carbs: 30,
+            protein: 12,
+            fats: 8,
+            calories: 350
+        },
+        soup: {
+            carbs: 15,
+            protein: 5,
+            fats: 3,
+            calories: 150
+        },
+        biryani: {
+            carbs: 40,
+            protein: 10,
+            fats: 15,
+            calories: 400
+        },
+        'butter chicken': {
+            carbs: 20,
+            protein: 15,
+            fats: 25,
+            calories: 350
+        },
+        naan: {
+            carbs: 30,
+            protein: 5,
+            fats: 10,
+            calories: 250
+        },
+        'tandoori chicken': {
+            carbs: 5,
+            protein: 30,
+            fats: 15,
+            calories: 300
+        },
+        'paneer tikka': {
+            carbs: 15,
+            protein: 20,
+            fats: 10,
+            calories: 280
+        },
+        samosa: {
+            carbs: 20,
+            protein: 5,
+            fats: 10,
+            calories: 200
+        },
+        'chole bhature': {
+            carbs: 35,
+            protein: 8,
+            fats: 15,
+            calories: 350
+        },
+        'rajma chawal': {
+            carbs: 40,
+            protein: 10,
+            fats: 8,
+            calories: 380
+        },
+        dosa: {
+            carbs: 25,
+            protein: 5,
+            fats: 3,
+            calories: 200
+        },
+        'idli sambhar': {
+            carbs: 30,
+            protein: 5,
+            fats: 2,
+            calories: 220
+        },
+        roti: {
+            carbs: 20,
+            protein: 5,
+            fats: 2,
+            calories: 150
+        },
+        dal: {
+            carbs: 20,
+            protein: 8,
+            fats: 3,
+            calories: 180
+        },
+        rice: {
+            carbs: 30,
+            protein: 5,
+            fats: 1,
+            calories: 200
+        },
+        sabzi: {
+            carbs: 15,
+            protein: 2,
+            fats: 1,
+            calories: 100
+        },     
+        'chicken curry': {
+            carbs: 10,
+            protein: 15,
+            fats: 8,
+            calories: 250
+        },
+        pulao: {
+            carbs: 35,
+            protein: 8,
+            fats: 10,
+            calories: 300
+        },
+        'paneer curry': {
+            carbs: 20,
+            protein: 10,
+            fats: 15,
+            calories: 280
+        },
+        sambar: {
+            carbs: 15,
+            protein: 3,
+            fats: 2,
+            calories: 120
+        },
+        rasam: {
+            carbs: 10,
+            protein: 2,
+            fats: 1,
+            calories: 80
+        },
+        'curd rice': {
+            carbs: 20,
+            protein: 3,
+            fats: 2,
+            calories: 150
+        },
+        apple: {
+            carbs: 15,
+            protein: 1,
+            fats: 0,
+            calories: 50
+        },
+        banana: {
+            carbs: 20,
+            protein: 1,
+            fats: 0,
+            calories: 100
+        },
+        mango: {
+            carbs: 25,
+            protein: 1,
+            fats: 0,
+            calories: 80
+        },
+        grapes: {
+            carbs: 15,
+            protein: 1,
+            fats: 0,
+            calories: 60
+        },
+        papaya: {
+            carbs: 20,
+            protein: 1,
+            fats: 0,
+            calories: 70
+        },
+        watermelon: {
+            carbs: 10,
+            protein: 1,
+            fats: 0,
+            calories: 40
+        },
+        orange: {
+            carbs: 15,
+            protein: 1,
+            fats: 0,
+            calories: 60
+        },
+        pineapple: {
+            carbs: 20,
+            protein: 1,
+            fats: 0,
+            calories: 50
+        },
+        guava: {
+            carbs: 15,
+            protein: 1,
+            fats: 0,
+            calories: 50
+        },
+        kiwi: {
+            carbs: 15,
+            protein: 1,
+            fats: 0,
+            calories: 60
+        },
+        'children (ages 4-8)': {
+            calories: '1,200-1,800 kcal/day',
+            protein: '19-34 grams/day',
+            calcium: '800-1,300 mg/day',
+            iron: '10-12 mg/day',
+            'vitamin a': '400-900 micrograms/day',
+            'vitamin c': '25-50 mg/day',
+        },
+        'adolescents (ages 9-13)': {
+            calories: '1,400-2,600 kcal/day',
+            protein: '34-52 grams/day',
+            calcium: '1,300 mg/day',
+            iron: '8-15 mg/day (higher for menstruating females)',
+            'vitamin a': '600-1,300 micrograms/day',
+            'vitamin c': '45-75 mg/day',
+        },
+        'teens (ages 14-18)': {
+            calories: '1,800-3,200 kcal/day (varies greatly depending on activity level and growth spurts)',
+            protein: '46-56 grams/day (varies)',
+            calcium: '1,300 mg/day',
+            iron: '11-27 mg/day (higher for menstruating females)',
+            'vitamin a': '700-1,600 micrograms/day',
+            'vitamin c': '65-90 mg/day',
+        },
+        'adults (ages 19-50)': {
+            calories: '1,800-3,000 kcal/day (varies based on activity level and metabolism)',
+            protein: '46-56 grams/day (varies)',
+            calcium: '1,000 mg/day',
+            iron: '8-18 mg/day (higher for menstruating females)',
+            'vitamin a': '700-900 micrograms/day (for men), 700-770 micrograms/day (for women)',
+            'vitamin c': '75-90 mg/day (for men), 65-75 mg/day (for women)',
+        },
+        'older adults (50+)': {
+            calories: '1,600-2,800 kcal/day (varies based on activity level and metabolism)',
+            protein: '46-56 grams/day (varies)',
+            calcium: '1,200 mg/day',
+            iron: '8-8 mg/day (lower for postmenopausal women)',
+            'vitamin a': '700-900 micrograms/day (for men), 600-770 micrograms/day (for women)',
+            'vitamin c': '75-90 mg/day (for men), 65-75 mg/day (for women)',
+        }
+    };
+
+    // Function to toggle food items visibility
+    function toggleFoodItems(sectionId) {
+        const foodItemContainer = document.getElementById(sectionId).getElementsByClassName('food-item-container')[0];
+        foodItemContainer.style.display = foodItemContainer.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    // Function to display nutritional information
+    function displayNutrients(foodItem) {
+        const data = nutrientsData[foodItem.toLowerCase()];
+        if (data) {
+            const nutrientsHTML = `
+                <h2>${foodItem}</h2>
+                <p>Carbohydrates: ${data.carbs}g</p>
+                <p>Protein: ${data.protein}g</p>
+                <p>Fats: ${data.fats}g</p>
+                <p>Calories: ${data.calories} kcal</p>
+            `;
+            nutrientsDiv.innerHTML = nutrientsHTML;
+        } else {
+            nutrientsDiv.innerHTML = '<h2>No nutritional information available</h2>';
+        }
+    }
+
+    // Function to calculate BMI
+    function calculateBMI() {
+        const weight = document.getElementById('weight').value;
+        const height = document.getElementById('height').value;
+        const bmi = weight / ((height / 100) ** 2);
+        bmiResultDiv.innerHTML = `<p>Your BMI: ${bmi.toFixed(2)}</p>`;
+        if (bmi < 18.5) {
+            bmiStatusDiv.innerHTML = '<p>Status: Underweight</p>';
+            dietSuggestionDiv.innerHTML = '<p>Diet Suggestion: Increase calorie and protein intake</p>';
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+            bmiStatusDiv.innerHTML = '<p>Status: Normal weight</p>';
+            dietSuggestionDiv.innerHTML = '<p>Diet Suggestion: Maintain a balanced diet</p>';
+        } else if (bmi >= 25 && bmi < 29.9) {
+            bmiStatusDiv.innerHTML = '<p>Status: Overweight</p>';
+            dietSuggestionDiv.innerHTML = '<p>Diet Suggestion: Reduce calorie intake, increase physical activity</p>';
+        } else {
+            bmiStatusDiv.innerHTML = '<p>Status: Obese</p>';
+            dietSuggestionDiv.innerHTML = '<p>Diet Suggestion: Consult a healthcare professional for a personalized diet plan</p>';
+        }
+    }
+</script>
+
+</body>
+</html>
